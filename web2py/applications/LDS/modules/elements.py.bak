@@ -1,0 +1,168 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from gluon import *
+
+import track_changes; track_changes(True)
+
+hydrogen = {
+	"name" : "H",
+	"atoms" : 1,
+	"needed" : 2,
+	"ve" : 1,
+	"halogen" : "false"
+}
+helium = {
+	"name" : "He",
+	"atoms" : 2,
+	"needed" : 0,
+	"ve" : 2,
+	"halogen" : "false"
+}
+lithium = {
+	"name" : "Li",
+	"atoms" : 3,
+	"needed" : 7,
+	"ve" : 1,
+	"halogen" : "false"
+}
+beryllium = {
+	"name" : "Be",
+	"atoms" : 4,
+	"needed" : 6,
+	"ve" : 2,
+	"halogen" : "false"
+}
+boron = {
+	"name" : "B",
+	"atoms" : 5,
+	"needed" : 5,
+	"ve" : 3,
+	"halogen" : "false"
+}
+carbon = {
+	"name" : "C",
+	"atoms" : 6,
+	"needed" : 4,
+	"ve" : 4,
+	"halogen" : "false"
+}
+nitrogen = {
+	"name" : "N",
+	"atoms" : 7,
+	"needed" : 3,
+	"ve" : 5,
+	"halogen" : "false"
+}
+oxygen = {
+	"name" : "O",
+	"atoms" : 8,
+	"needed" : 2,
+	"ve" : 6,
+	"halogen" : "false"
+}
+fluorine = {
+	"name" : "F",
+	"atoms" : 9,
+	"needed" : 1,
+	"ve" : 7,
+	"halogen" : "true"
+}
+neon = {
+	"name" : "Ne",
+	"atoms" : 10,
+	"needed" : 0,
+	"ve" : 8,
+	"halogen" : "false"
+}
+sodium = {
+	"name" : "Na",
+	"atoms" : 11,
+	"needed" : 7,
+	"ve" : 1,
+	"halogen" : "false"
+}
+magnesium = {
+	"name" : "Mg",
+	"atoms" : 12,
+	"needed" : 6,
+	"ve" : 2,
+	"halogen" : "false"
+}
+aluminium = {
+	"name" : "Al",
+	"atoms" : 13,
+	"needed" : 5,
+	"ve" : 3,
+	"halogen" : "false"
+}
+silicon = {
+	"name" : "Si",
+	"atoms" : 14,
+	"needed" : 4,
+	"ve" : 4,
+	"halogen" : "false"
+}
+phosphorus = {
+	"name" : "P",
+	"atoms" : 15,
+	"needed" : 3,
+	"ve" : 5,
+	"halogen" : "false"
+}
+sulfur = {
+	"name" : "S",
+	"atoms" : 16,
+	"needed" : 2,
+	"ve" : 6,
+	"halogen" : "false"
+}
+chlorine = {
+	"name" : "Cl",
+	"atoms" : 17,
+	"needed" : 1,
+	"ve" : 7,
+	"halogen" : "true"
+}
+argon = {
+	"name" : "Ar",
+	"atoms" : 18,
+	"needed" : 0,
+	"ve" : 8,
+	"halogen" : "false"
+}
+bromine = {
+	"name" : "Br",
+	"atoms" : 35,
+	"needed" : 1,
+	"ve" : 7,
+	"halogen" : "true"
+}
+iodine = {
+	"name" : "I",
+	"atoms" : 53,
+	"needed" : 1,
+	"ve" : 7,
+	"halogen" : "true"
+}
+periodicTable = {
+	"H" : hydrogen,
+	"He" : helium,
+	"Li" : lithium,
+	"Be" : beryllium,
+	"B" : boron,
+	"C" : carbon,
+	"N" : nitrogen,
+	"O" : oxygen,
+	"F" : fluorine,
+	"Ne" : neon,
+	"Na" : sodium,
+	"Mg" : magnesium,
+	"Al" : aluminium,
+	"Si" : silicon,
+	"P" : phosphorus,
+	"S" : sulfur,
+	"Cl" : chlorine,
+	"Ar" : argon,
+	"Br" : bromine,
+	"I" : iodine
+}

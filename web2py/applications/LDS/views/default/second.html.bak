@@ -1,0 +1,240 @@
+<html>
+
+
+<head>
+	<meta charset="utf-8">
+    <script type="text/javascript" src="{{=URL('static','js/jsmol/JSmol.min.js')}}"></script>
+	<script type="text/javascript">
+		/*Jmol._isAsync = false;
+		
+		var jmolApplet0;
+
+		//var s = document.location.search;
+		
+		//Jmol._debugCode = (s.indexOf("debugcode") >= 0);
+		
+		jmol_isReady = function(applet) {
+			document.title = (applet._id + " - Jmol " + Jmol.___JmolVersion)
+			Jmol._getElement(applet, "appletdiv").style.border="1px solid blue"
+		}
+
+		var Info = {
+			debug: false,
+			color: "#FFFFFF",
+			height: 600,
+			width: 600,
+			script: "load :{{=session.formulaDB}}; lcaoCartoon LONEPAIR 'lp'",
+			use: "HTML5",
+			j2sPath: "{{=URL('static','js/jsmol/j2s')}}",
+			jarPath: "{{=URL('static','js/jsmol/java')}}",
+			serverURL: "{{=URL('static','js/jsmol/php/jsmol.php')}}",
+			readyFunction: jmol_isReady,
+			allowJavaScript: true
+		};
+        var InfoC60 = {
+			debug: false,
+			color: "#FFFFFF",
+			height: 600,
+			width: 600,
+			script: "load FILES '{{=URL('static','c60.pdb')}}'; lcaoCartoon LONEPAIR 'lpa'; lcaoCartoon LONEPAIR 'lpb'",
+			use: "HTML5",
+			j2sPath: "{{=URL('static','js/jsmol/j2s')}}",
+			jarPath: "{{=URL('static','js/jsmol/java')}}",
+			serverURL: "{{=URL('static','js/jsmol/php/jsmol.php')}}",
+			readyFunction: jmol_isReady,
+			allowJavaScript: true
+		};
+        var Info2LP = {
+			debug: false,
+			color: "#FFFFFF",
+			height: 600,
+			width: 600,
+			script: "load :{{=session.formulaDB}}; lcaoCartoon LONEPAIR 'lpa'; lcaoCartoon LONEPAIR 'lpb'",
+			use: "HTML5",
+			j2sPath: "{{=URL('static','js/jsmol/j2s')}}",
+			jarPath: "{{=URL('static','js/jsmol/java')}}",
+			serverURL: "{{=URL('static','js/jsmol/php/jsmol.php')}}",
+			readyFunction: jmol_isReady,
+			allowJavaScript: true
+		};
+        */
+        
+        $(document).ready(function() { $("#2d").attr("src","/LDS/static/images/2d/{{=session.formulaInput}}.png")})
+        
+        switch("{{=session.case}}") {
+            case "Case1a":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase1a}} lone pair(s), {{=session.numBondCase1a}} bond(s), and {{=session.doubleBondCase1a}} double bond(s).") })
+                break;
+            case "Case1b":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase1b}} lone pair(s), {{=session.numBondCase1b}} bond(s), and {{=session.ringsCase1b}} ring(s).") })
+                break;
+            case "Case2a":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2a}} lone pair(s), {{=session.numBondCase2a}} bond(s), and {{=session.doubleBondCase2a}} double bond(s).") })
+                $(document).ready(function() { $("#ExtraRuleset").html("H is always peripheral, not the central atom, and cannot make octets. Its octet is satisfied with only two electrons. H<sub>2</sub> is trivial, eg H-H or H:H. \nIn NB calculation, account for 1 electron needed for H to complete its octet. \nIn LP calculation, account for 7 electrons for hydrogen when &#8721ve ≤ 8.") })
+                break;
+            case "Case2b":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2b}} lone pair(s), {{=session.numBondCase2b}} bond(s), and {{=session.doubleBondCase2b}} double bond(s).") })
+                $(document).ready(function() { $("#ExtraRuleset").html("Noble Gases are always the central atom. A Negative double bond value indicates expansion of the octet of the central atom. Thus, add the double bond value in absolute value to determine the number of bonds.") })
+                break;
+            case "Case2c":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2a}} lone pair(s), {{=session.numBondCase2a}} bond(s), and {{=session.doubleBondCase2a}} double bond(s).") })
+                break;
+            case "Case3a":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase3a}} lone pair(s), {{=session.numBondCase3a}} bond(s), and {{=session.doubleBondCase3a}} double bond(s).") })
+                $(document).ready(function() { $("#ExtraRuleset").html("If A and Q are both even, the lone pair calculations do NOT work. Ex C<sub>2</sub>H<sub>6</sub> , C<sub>2</sub>H<sub>4</sub> , C<sub>2</sub>H<sub>2</sub> , C<sub>2</sub>O<sub>4</sub><sup>2-</sup> , S<sub>4</sub>O<sub>6</sub><sup>2-</sup> , N<sub>2</sub>O<sub>4</sub> and I<sub>2</sub> F<sub>12</sub><sup>2-</sup> . There are no lone pair(s) on the two central atoms. The electrons are used to bond the central atoms. The calculated LP’s are the number of bonds used to bond the central atoms. If there are more than two central atoms, the lone pairs, LP = LP<sub>calc</sub> + 1, are on the bridging atoms NB and DB calculations do work. Negative DB value indicates expansion of octet of the central atom. Thus, add the DB value in absolute value to determine the NB. NB<sub>real</sub> = NB<sub>calculated</sub> + | DB | If Q = 1 and A = 2; Two central atoms (A) bond one another and Q bonds to one of the central atoms. If Q ≥ 3, one of the oxygen bonds two central atoms. Build the LDS and look for better resonance structure using the formal charge calculation on each atom. F. C. = # of ve - dots - dashes # of ve: Valence electrons of the element, dots: # of electrons and dashes: # of bonds. For resonance structures, containing three or more oxygens, consider 1 DB oxygen with one C, P, N, up to 2 DBs with one S and up to 3 DBs with one Cl, Br and I atoms.") })
+                break;
+            case "Case3b":
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase3a}} lone pair(s), {{=session.numBondCase3a}} bond(s), and {{=session.doubleBondCase3a}} double bond(s).") })
+                $(document).ready(function() { $("#ExtraRuleset").html("Account 7 for hydrogen valence electrons. The central atoms C and N are bonded to one another. The lone pair calculations gives the sum of the lone pairs on the central atoms and the number of bonds between the central atoms. Hydrogens are peripheral atoms.") })
+                break;
+        }
+        /*
+        if ("{{=session.formulaDB}}" == "C60") {
+            $(document).ready(function() { $("#appdiv").html(Jmol.getAppletHtml("JmolPane", InfoC60)) })
+        } else if ("{{=session.formulaDB}}" == "H2O") {
+            $(document).ready(function() { $("#appdiv").html(Jmol.getAppletHtml("JmolPane", Info2LP)) })
+        } else {
+		    $(document).ready(function() { $("#appdiv").html(Jmol.getAppletHtml("JmolPane", Info)) })
+        }
+        */
+    </script>
+</head>
+
+
+<body>
+{{extend 'layout.html'}}
+	<center>
+    <h1>The formula is <span style="color:blue">{{=XML(session.htmlFormula)}}</span></h1>
+    <img id="2d" style="; max-width: 40%; max-height: 40%" src="/LDS/static/images/404.png"></img>
+    <p id="Ruleset"></p>
+    <p id="ExtraRuleset"></p>
+    <p style="margin-bottom: 0px">Formulas used to calculate</p>
+    <img id="case" style="margin-top:0px" src="/LDS/static/images/cases/{{=session.case}}.png"></img>
+    <div style="position:static; bottom:60px; width:100%"><a style="font-size:30px" href="./first.html">Back</a></div>
+<!--
+    <p>The array retrieved is <span style="color:red">{{=session.convertedFormula}}</span>. The website searched the database for <span style="color:red">{{=session.formulaDB}}</span>. This is {{=session.case}}.</p>
+    <table border="1px black">
+        <tr>
+            <th>
+                Case
+            </th>
+            <th>
+                LP
+            </th>
+            <th>
+                NB
+            </th>
+            <th>
+                DB
+            </th>
+            <th>
+                Rings
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Case 1a
+            </td>
+            <td>
+                {{=session.lonePairCase1a}}
+            </td>
+            <td>
+                {{=session.numBondCase1a}}
+            </td>
+            <td>
+                {{=session.doubleBondCase1a}}
+            </td>
+            <td>
+                0
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Case 1b
+            </td>
+            <td>
+                {{=session.lonePairCase1b}}
+            </td>
+            <td>
+                {{=session.numBondCase1b}}
+            </td>
+            <td>
+                0
+            </td>
+            <td>
+                {{=session.ringsCase1b}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Case 2a
+            </td>
+            <td>
+                {{=session.lonePairCase2a}}
+            </td>
+            <td>
+                {{=session.numBondCase2a}}
+            </td>
+            <td>
+                {{=session.doubleBondCase2a}}
+            </td>
+            <td>
+                0
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Case 2b
+            </td>
+            <td>
+                {{=session.lonePairCase2b}}
+            </td>
+            <td>
+                {{=session.numBondCase2b}}
+            </td>
+            <td>
+                {{=session.doubleBondCase2b}}
+            </td>
+            <td>
+                0
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Case 2c
+            </td>
+            <td>
+                {{=session.lonePairCase2c}}
+            </td>
+            <td>
+                {{=session.numBondCase2c}}
+            </td>
+            <td>
+                {{=session.doubleBondCase2c}}
+            </td>
+            <td>
+                0
+            </td>
+        <tr>
+            <td>
+                Case 3
+            </td>
+            <td>
+                {{=session.lonePairCase3}}
+            </td>
+            <td>
+                {{=session.numBondCase3}}
+            </td>
+            <td>
+                {{=session.doubleBondCase3}}
+            </td>
+            <td>
+                0
+            </td>
+        </tr>
+        </tr>
+    </table>
+    <div id="appdiv">b</div>
+-->
+</body>
+</html>
