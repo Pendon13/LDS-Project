@@ -649,7 +649,7 @@ def numBondCase3a(formula, db3a):
     if db3a < 0:
         nonBondingCase3a = (neededElectron + charge)/2 - db3a
     else:
-        nonBondingCase3a = (neededElectron + charge)/2 + db3a
+        nonBondingCase3a = (neededElectron + charge)/2
     return nonBondingCase3a
 
 def doubleBondCase3a(formula):

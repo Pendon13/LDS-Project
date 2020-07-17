@@ -50,13 +50,13 @@ def first():
         ###########
         session.lonePairCase3a = case.lonePairCase3a(session.convertedFormula)
         session.doubleBondCase3a = case.doubleBondCase3a(session.convertedFormula)
-        session.numBondCase3a = case.numBondCase3a(session.convertedFormula, session.doubleBondCase3)
+        session.numBondCase3a = case.numBondCase3a(session.convertedFormula, session.doubleBondCase3a)
         ###########
         # Case 3b #
         ###########
         session.lonePairCase3b = case.lonePairCase3b(session.convertedFormula)
         session.doubleBondCase3b = case.doubleBondCase3b(session.convertedFormula)
-        session.numBondCase3b = case.numBondCase3b(session.convertedFormula, session.doubleBondCase3)
+        session.numBondCase3b = case.numBondCase3b(session.convertedFormula, session.doubleBondCase3b)
         redirect(URL('second'))
     return dict()
 
