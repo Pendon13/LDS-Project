@@ -58,7 +58,10 @@
 			allowJavaScript: true
 		};
         */
-        
+        function goBack() {
+            window.history.back()
+        }
+
         $(document).ready(function() { $("#2d").attr("src","/LDS/static/images/2d/{{=session.formulaInput}}.png")})
         
         switch("{{=session.case}}") {
@@ -84,7 +87,7 @@
                 $(document).ready(function() { $("#ExtraRuleset").html("If A and Q are both even, the lone pair calculations do NOT work. Ex C<sub>2</sub>H<sub>6</sub> , C<sub>2</sub>H<sub>4</sub> , C<sub>2</sub>H<sub>2</sub> , C<sub>2</sub>O<sub>4</sub><sup>2-</sup> , S<sub>4</sub>O<sub>6</sub><sup>2-</sup> , N<sub>2</sub>O<sub>4</sub> and I<sub>2</sub> F<sub>12</sub><sup>2-</sup> . There are no lone pair(s) on the two central atoms. The electrons are used to bond the central atoms. The calculated LP’s are the number of bonds used to bond the central atoms. If there are more than two central atoms, the lone pairs, LP = LP<sub>calc</sub> + 1, are on the bridging atoms NB and DB calculations do work. Negative DB value indicates expansion of octet of the central atom. Thus, add the DB value in absolute value to determine the NB. NB<sub>real</sub> = NB<sub>calculated</sub> + | DB | If Q = 1 and A = 2; Two central atoms (A) bond one another and Q bonds to one of the central atoms. If Q ≥ 3, one of the oxygen bonds two central atoms. Build the LDS and look for better resonance structure using the formal charge calculation on each atom. F. C. = # of ve - dots - dashes # of ve: Valence electrons of the element, dots: # of electrons and dashes: # of bonds. For resonance structures, containing three or more oxygens, consider 1 DB oxygen with one C, P, N, up to 2 DBs with one S and up to 3 DBs with one Cl, Br and I atoms.") })
                 break;
             case "Case3b":
-                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have a total of {{=session.lonePairCase3b}} combination of bond(s) and lone pair(s) between the central atoms, {{=session.numBondCase3b}} bond(s), and {{=session.doubleBondCase3b}} double bond(s).") })
+                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have a total combination of {{=session.lonePairCase3b}} bond(s) and lone pair(s) between the central atoms, {{=session.numBondCase3b}} bond(s), and {{=session.doubleBondCase3b}} double bond(s).") })
                 $(document).ready(function() { $("#ExtraRuleset").html("Account 7 for hydrogen valence electrons. The central atoms C and N are bonded to one another. The lone pair calculations gives the sum of the lone pairs on the central atoms and the number of bonds between the central atoms. Hydrogens are peripheral atoms.") })
                 break;
         }
@@ -110,7 +113,8 @@
     <p id="ExtraRuleset"></p>
     <p style="margin-bottom: 0px">Formulas used to calculate</p>
     <img id="case" style="margin-top:0px" src="/LDS/static/images/cases/{{=session.case}}.png"></img>
-    <div style="position:static; bottom:60px; width:100%"><a style="font-size:30px" href="./first.html">Back</a></div>
+    <br>
+    <button onclick="goBack()">Back</button>
 <!--
     <p>The array retrieved is <span style="color:red">{{=session.convertedFormula}}</span>. The website searched the database for <span style="color:red">{{=session.formulaDB}}</span>. This is {{=session.case}}.</p>
     <table border="1px black">

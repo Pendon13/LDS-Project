@@ -58,7 +58,10 @@
 			allowJavaScript: true
 		};
         */
-        
+        function goBack() {
+            window.history.back()
+        }
+
         $(document).ready(function() { $("#2d").attr("src","/LDS/static/images/2d/{{=session.formulaInput}}.png")})
         
         switch("{{=session.case}}") {
@@ -110,7 +113,8 @@
     <p id="ExtraRuleset"></p>
     <p style="margin-bottom: 0px">Formulas used to calculate</p>
     <img id="case" style="margin-top:0px" src="/LDS/static/images/cases/{{=session.case}}.png"></img>
-    <div style="position:static; bottom:60px; width:100%"><a style="font-size:30px" href="./first.html">Back</a></div>
+    <br><br>
+    <button onclick="goBack()">Back</button>
 <!--
     <p>The array retrieved is <span style="color:red">{{=session.convertedFormula}}</span>. The website searched the database for <span style="color:red">{{=session.formulaDB}}</span>. This is {{=session.case}}.</p>
     <table border="1px black">

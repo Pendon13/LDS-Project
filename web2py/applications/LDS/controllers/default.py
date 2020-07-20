@@ -9,10 +9,6 @@ import case
 import elements
 
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
-
-def first():
 
     if request.vars.formulaInput:
         session.formulaInput = request.vars.formulaInput
