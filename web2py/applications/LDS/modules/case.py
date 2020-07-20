@@ -426,7 +426,7 @@ def lonePairCase1a(formula):
     lonePairCase1a = ((ve - charge) % 8)/2
     return lonePairCase1a
 
-def numBondCase1a(formula):
+def numBondCase1a(formula, db1a):
     x = charge = neededElectron = 0
     while(x < len(formula)-1):
         if formula[x] == "Charge":
@@ -437,7 +437,10 @@ def numBondCase1a(formula):
             amount = formula[x+1]
             neededElectron += needed(element, amount)
             x += 2
-    nonBondingCase1a = (neededElectron + charge)/2
+    if db1a < 0:
+        nonBondingCase1a = (neededElectron + charge)/2 - db1a
+    else:
+        nonBondingCase1a = (neededElectron + charge)/2
     return nonBondingCase1a
 
 def doubleBondCase1a(formula):
@@ -521,7 +524,7 @@ def lonePairCase2a(formula):
     lonePairCase2a = ((ve - charge) % 8)/2
     return lonePairCase2a
 
-def numBondCase2a(formula):
+def numBondCase2a(formula, db2a):
     x = charge = neededElectron = 0
     while(x < len(formula)-1):
         if formula[x] == "Charge":
@@ -539,7 +542,10 @@ def numBondCase2a(formula):
             else:
                 neededElectron += needed(element, amount)
                 x += 2
-    nonBondingCase2a = (neededElectron + charge)/2
+    if db2a < 0:
+        nonBondingCase2a = (neededElectron + charge)/2 - db2a
+    else:
+        nonBondingCase2a = (neededElectron + charge)/2
     return nonBondingCase2a
 
 def doubleBondCase2a(formula):

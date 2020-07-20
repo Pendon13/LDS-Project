@@ -21,8 +21,8 @@ def index():
         # Case 1a #
         ###########
         session.lonePairCase1a = case.lonePairCase1a(session.convertedFormula)
-        session.numBondCase1a = case.numBondCase1a(session.convertedFormula)
         session.doubleBondCase1a = case.doubleBondCase1a(session.convertedFormula)
+        session.numBondCase1a = case.numBondCase1a(session.convertedFormula, session.doubleBondCase1a)
         ###########
         # Case 1b #
         ###########
@@ -33,8 +33,8 @@ def index():
         # Case 2a #
         ###########
         session.lonePairCase2a = case.lonePairCase2a(session.convertedFormula)
-        session.numBondCase2a = case.numBondCase2a(session.convertedFormula)
         session.doubleBondCase2a = case.doubleBondCase2a(session.convertedFormula)
+        session.numBondCase2a = case.numBondCase2a(session.convertedFormula, session.doubleBondCase2a)
         ###########
         # Case 2b #
         ###########
