@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 from gluon import *
 # ---- To-do List ---- #
-# Displays with charges cannot have ^ symbol
-# Other Cases
-# CSS for the page
-# Debug section
+
 # ---- ---- #
+
+# ------ Begin Hash Table of Elements ------ #
 hydrogen = {
     "name" : "H",
     "atoms" : 1,
@@ -161,6 +160,10 @@ xenon = {
     "ve" : 8,
     "halogen" : "false"
 }
+# ------ End Hash Table of Elements ------ #
+
+# ------ Begin General Periodic Table ------ #
+# Used to relate Element inputs to Hash Table Values
 periodicTable = {
     "H" : hydrogen,
     "He" : helium,
@@ -186,11 +189,12 @@ periodicTable = {
     "Xe" : xenon
 }
 
+# ------ End General Periodic Table ------ #
 
+# ---- Begin Functions ---- #
 
-
-# ---- ---- #
 def checkInteger(case):
+# Integer Check Function
     try:
         int(case)
         return True
@@ -199,38 +203,45 @@ def checkInteger(case):
         return False
 
 def convertFormula(initialFormula):
+# Convert any input into a readable array
+# Array is all strings [Charge, Value, Element1, Element1Amount, Element2, Element2Amount, ..., ElementN, ElementNAmount]
     newFormula = []
     x = 0
     if initialFormula.find("^") == -1:
+# Check for '^' symbol, when it does not exist then assign 0 to the charge in array
         newFormula.insert(0, 0)
         newFormula.insert(0, "Charge")
     while(x < len(initialFormula)):
-#       print("start " + str(x) + " --- At " + str(initialFormula[x]))
-#       print("end if < " + str(len(initialFormula)))
-#       print(newFormula)
         elementSymbol = initialFormula[x]
         if elementSymbol == "^":
+# Check for current interated character for '^' symbol, assigns the correct charge to the array
             charge = assignCharge(initialFormula[x+1:])
             newFormula.insert(0, str(charge))
             newFormula.insert(0, "Charge")
             break
         elif elementSymbol.isupper():
+# Check for Uppercase character        
             if initialFormula[x] == initialFormula[-1]:
+# Check to see if formula ends in an Uppercase character and assigns an amount of 1 to the element
                 newFormula.append(elementSymbol)
                 newFormula.append("1")
             while(x < len(initialFormula)-1):
                 if initialFormula[x+1] == "^":
+# Check for '^' after an Uppercase character that ends element symbol
                     newFormula.append(elementSymbol)
                     break
                 elif not initialFormula[x+1].isupper() and not initialFormula[x+1].isdigit():
+# Check for lowercase letter and end the element symbol
                     elementSymbol += initialFormula[x+1]
                     newFormula.append(elementSymbol)
                     if (x+2 < len(initialFormula)-1):
+# Check if last character and assign amount of 1                    
                         if initialFormula[x+2].isupper():
                             newFormula.append("1")
                             break
                     break
                 elif initialFormula[x+1].isupper():
+# Check if next character is Uppercase and assign amount of 1
                     newFormula.append(elementSymbol)
                     newFormula.append("1")
                     break
@@ -238,6 +249,7 @@ def convertFormula(initialFormula):
                     newFormula.append(elementSymbol)
                     break
         elif elementSymbol.isdigit():
+# Check for a Digit character and ensure all following digits are accounted for
             while(x < len(initialFormula)-1):
                 if initialFormula[x+1].isdigit():
                     elementSymbol += initialFormula[x+1]
@@ -251,8 +263,10 @@ def convertFormula(initialFormula):
     return newFormula
 
 def generateHTMLFormula(formula):
+# Used to apply all subscripts and superscripts to the formula to display in HTML
+# Takes in formula as an array format
     htmlFormula = ""
-    x=2
+    x = 2
     if formula[1] == 0:
         while(x < len(formula)):
             if formula[x].isdigit() and int(formula[x]) != 1:
@@ -289,6 +303,8 @@ def generateHTMLFormula(formula):
     return htmlFormula
 
 def assignCharge(input):
+# Checks for the value and returns the charge
+# Used for inputs after a '^' symbol
     charge = 0
     if input == "-":
         charge = -1
@@ -325,6 +341,8 @@ def assignCharge(input):
     return charge
 
 def getElementValues(element):
+# Test script to return items from the hash table
+# Unused
     elementDict = atoms = ve = needed = 0
     elementDict = periodicTable.get(element)
     atoms = elementDict.get("atoms")
@@ -336,6 +354,7 @@ def getElementValues(element):
     return True
 
 def valenceElectron(element, amount):
+# Return valence electron value from hash table and multiply it by the amount of elements
     elementDict = periodicTable.get(element)
     totalVE = ve = 0
     amount = int(amount)
@@ -344,6 +363,7 @@ def valenceElectron(element, amount):
     return totalVE
 
 def needed(element, amount):
+# Return needed electrons for octet value from hash table and multiply it by the amount of elements
     amount = int(amount)
     elementDict = periodicTable.get(element)
     needed = elementDict.get("needed")
@@ -351,6 +371,8 @@ def needed(element, amount):
     return totalNeeded
 
 def atoms(element, amount):
+# Return atoms value from hash table and multiply it by the amount of elements
+# Unused
     amount = int(amount)
     elementDict = periodicTable.get(element)
     atoms = elementDict.get("atoms")
@@ -362,51 +384,69 @@ def atoms(element, amount):
 #####################
 
 def choosingCase(formula, convertedFormula):
+# Return case in algorithms pdf
     case = ""
     if len(convertedFormula) > 4:
         if formula.find("C") != -1 and formula.find("O") != -1 and int(convertedFormula[formula.find("C")+3]) >= 2:
+# Check for multiple C atoms and an O atoms
             case = "Case3a"
             return case
         elif formula.find("N") != -1 and formula.find("O") != -1 and int(convertedFormula[formula.find("N")+3]) >= 2:
+# Check for multiple N atoms and an O atoms
             case = "Case3a"
             return case
         elif formula.find("P") != -1 and formula.find("O") != -1 and int(convertedFormula[formula.find("P")+3]) >= 2:
+# Check for multiple P atoms and an O atoms
             case = "Case3a"
             return case
         elif formula.find("S") != -1 and formula.find("O") != -1 and int(convertedFormula[formula.find("S")+3]) >= 2:
+# Check for multiple S atoms and an O atoms
             case = "Case3a"
             return case
         elif formula.find("Cl") != -1 and formula.find("O") != -1 and int(convertedFormula[formula.find("Cl")+3]) >= 2:
+# Check for multiple Cl atoms and an O atoms
             case = "Case3a"
             return case
         elif formula.find("C") != -1 and (formula.find("H") != -1 or formula.find("F") != -1 or formula.find("Cl") != -1 or formula.find("Br") != -1 or formula.find("I") != -1 or formula.find("At") != -1 or formula.find("Ts") != -1) and int(convertedFormula[formula.find("C")+3]) >= 2:
+# Check for multiple C atoms and an Halogen atoms
             case = "Case3b"
             return case
         elif formula.find("N") != -1 and (formula.find("H") != -1 or formula.find("F") != -1 or formula.find("Cl") != -1 or formula.find("Br") != -1 or formula.find("I") != -1 or formula.find("At") != -1 or formula.find("Ts") != -1) and int(convertedFormula[formula.find("N")+3]) >= 2:
+# Check for multiple N atoms and an Halogen atoms
             case = "Case3b"
             return case
         elif formula.find("He") != -1 or formula.find("Ne") != -1 or formula.find("Ar") != -1 or formula.find("Kr") != -1 or formula.find("Xe") != -1 or formula.find("Rn") != -1 or formula.find("Og") != -1:
+# Check for Noble Gas atoms
             case ="Case2b"
             return case
         elif formula.find("O") != -1 and formula.find("H") == -1:
             if formula.find("C") != -1 or formula.find("N") != -1 or formula.find("S") != -1:
+# Check for O and H atoms with C, N, S atoms
                 case = "Case2c"
                 return case
+# Base Case for multiple atoms
         case = "Case2a"
         return case
     elif len(convertedFormula) == 4 and int(convertedFormula[3]) < 4:
+# Monoatomic atoms with less than 4 total
         case = "Case1a"
         return case
     elif len(convertedFormula) == 4 and int(convertedFormula[3]) >= 4:
+# Monoatomic atoms with more than 4 total
         case = "Case1b"
         return case
     return case
 
 def diatomicCheck(formula):
+# Check for diatomic atoms
+# Unused
     if len(formula) == 4 and formula[len(formula)-1] == 2:
         return True
     else:
         return False
+
+# ----- Begin Case Formulas ----- #
+# See PDF of algorithms for the math
 
 #####################
 #      Case 1a      #
