@@ -86,9 +86,14 @@
                 }
 				break;
             case "Case2b":
-                $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2b}} lone pair(s), {{=session.numBondCase2b}} bond(s), and {{=session.doubleBondCase2b}} double bond(s).") })
-                $(document).ready(function() { $("#ExtraRuleset").html("Noble Gases are always the central atom. A Negative double bond value indicates expansion of the octet of the central atom. Thus, add the double bond value in absolute value to determine the number of bonds.") })
-                break;
+/*                if ({{=session.doubleBondCase2b}} < 0 {
+    				$(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2b}} lone pair(s), " + eval({{=session.numBondCase2b}} + {{=session.doubleBondCase2b}}) + " bond(s), and {{=session.doubleBondCase2b}} double bond(s).") })
+                    $(document).ready(function() { $("#ExtraRuleset").html("Noble Gases are always the central atom. A Negative double bond value indicates expansion of the octet of the central atom. Thus, add the double bond value in absolute value to determine the number of bonds.<br>Thus, our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2b}} lone pair(s), {{=session.numBondCase2b}} bond(s), and " + abs({{=session.doubleBondCase2b}}) + " double bond(s).") })				    
+				} else {*/
+			    	$(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2b}} lone pair(s), {{=session.numBondCase2b}} bond(s), and {{=session.doubleBondCase2b}} double bond(s).") })
+                    $(document).ready(function() { $("#ExtraRuleset").html("Noble Gases are always the central atom. A Negative double bond value indicates expansion of the octet of the central atom. Thus, add the double bond value in absolute value to determine the number of bonds.") })
+//                }
+				break;
             case "Case2c":
                 $(document).ready(function() { $("#Ruleset").html("Our calculations using the formulas show that {{=XML(session.htmlFormula)}} will have {{=session.lonePairCase2a}} lone pair(s), {{=session.numBondCase2a}} bond(s), and {{=session.doubleBondCase2a}} double bond(s).") })
                 break;
@@ -130,6 +135,7 @@
     <p id="ExtraRuleset"></p>
     <p style="margin-bottom: 0px">Formulas used to calculate</p>
     <img id="case" style="margin-top:0px" src="/LDS/static/images/cases/{{=session.case}}.png"></img>
+	<p id="Values"></p>
     <br><br>
     <button onclick="goBack()">Back</button>
 <!--
